@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Dear Putri ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>For My Dearest Putri</h1>
+      </div>
+
+      <div class="photo-gallery">
+        <div class="photo-container">
+          <img src="./asset/gambar1.jpeg" alt="Foto Kita" />
+        </div>
+        <div class="photo-container">
+          <img src="./asset/gambar2.jpeg" alt="Foto Kita" />
+        </div>
+        <div class="photo-container">
+          <img src="./asset/gambar3.jpeg" alt="Foto Kita" />
+        </div>
+        <div class="photo-container">
+          <img src="./asset/gambar4.jpeg" alt="Foto Kita" />
+        </div>
+        <div class="photo-container">
+          <img src="./asset/gambar5.jpeg" alt="Foto Kita" />
+        </div>
+        <div class="photo-container">
+          <img src="./asset/gambar6.jpeg" alt="Foto Kita" />
+        </div>
+      </div>
+
+      <div class="message-section">
+        <h2>Pesan Untukmu</h2>
+        <p id="message"></p>
+      </div>
+
+      <div class="date-ideas">
+        <h2>Mau Kemana Kita Hari Ini?</h2>
+        <div class="date-option" onclick="selectDate(this)">Makan</div>
+        <div class="date-option" onclick="selectDate(this)">
+          Nonton Film di Cinema
+        </div>
+        <div class="date-option" onclick="selectDate(this)">
+          Jalan-jalan aja
+        </div>
+        <div class="date-option" onclick="selectDate(this)">Coffee Date</div>
+        <div class="date-option" onclick="selectDate(this)">Surprise</div>
+      </div>
+
+      <div class="selected-date">
+        <h2>Pilihan Kencan Putri</h2>
+        <div id="dateHistory"></div>
+        <button onclick="resetDateHistory()">Reset Pilihan</button>
+      </div>
+
+      <div class="feedback-section">
+        <h2>Balas Pesanku</h2>
+        <textarea placeholder="Tulis pesanmu disini..." rows="4"></textarea>
+        <button onclick="sendFeedback()">Kirim Pesan</button>
+      </div>
+      <div class="message-history">
+        <h2>Pesan dari Putri</h2>
+        <div id="messageHistory"></div>
+        <button onclick="resetMessageHistory()" class="reset-button">
+          Hapus Pesan
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

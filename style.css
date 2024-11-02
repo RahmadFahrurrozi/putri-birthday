@@ -1,0 +1,283 @@
+/* Styles untuk landing page dan main page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Landing Page Styles */
+.landing-page,
+.birthday-message {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #ff8fa3, #ffc2cd);
+  text-align: center;
+  transition: transform 1s ease-in-out;
+}
+
+.landing-page {
+  z-index: 3;
+}
+
+.birthday-message {
+  z-index: 2;
+  transform: translateX(100%);
+}
+
+.initial-button {
+  padding: 20px 40px;
+  font-size: 1.5em;
+  background: white;
+  color: #666;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  margin-top: 20px;
+}
+
+.initial-button:hover {
+  transform: scale(1.1);
+  color: white;
+}
+
+.birthday-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 20px 0;
+  border: 5px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.birthday-title {
+  font-size: 2.5em;
+  color: white;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.birthday-text {
+  color: white;
+  font-size: 1.2em;
+  max-width: 80%;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.continue-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background: white;
+  color: #666;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.continue-button:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  position: absolute;
+  animation: confetti 5s ease-in-out infinite;
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+/* Main Page Styles */
+body {
+  background-color: #ffe6e6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  padding: 20px;
+  background-color: #ff8fa3;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.photo-container {
+  position: relative;
+  padding-bottom: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.photo-container img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.photo-container:hover img {
+  transform: scale(1.1);
+}
+
+.message-section,
+.date-ideas,
+.feedback-section,
+.selected-date {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.date-option {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #ff8fa3;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.date-option:hover {
+  background-color: #ff647a;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ff8fa3;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+button {
+  background-color: #ff8fa3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ff647a;
+}
+
+.date-history {
+  background-color: #fff5f5;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+.date-timestamp {
+  font-size: 0.8em;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .birthday-title {
+    font-size: 2em;
+  }
+  .birthday-text {
+    font-size: 1em;
+  }
+  .initial-button,
+  .continue-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+  }
+}
+
+.message-history {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.message-bubble {
+  background-color: #fff5f5;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px 0;
+  position: relative;
+}
+
+.message-content {
+  color: #333;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.message-timestamp {
+  font-size: 0.8em;
+  color: #666;
+  text-align: right;
+}
+
+.no-messages {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Animasi untuk pesan baru */
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.message-bubble {
+  animation: popIn 0.3s ease-out forwards;
+}
