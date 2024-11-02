@@ -7,10 +7,6 @@ function createConfetti() {
     confetti.style.animationDelay = Math.random() * 3 + "s";
     confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
     document.body.appendChild(confetti);
-
-    setTimeout(() => {
-      confetti.remove();
-    }, 5000);
   }
 }
 
