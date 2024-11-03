@@ -3,51 +3,135 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For My Dear Putri ❤️</title>
+    <title>For My Dear Putri</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <audio id="bgMusic" loop>
+      <source src="./asset/penjagahati.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="musicControl" class="music-control">
+      <span class="music-icon">🔈</span>
+    </button>
     <div class="container">
       <div class="header">
         <h1>For My Dearest Putri</h1>
       </div>
 
       <div class="photo-gallery">
-        <div class="photo-container">
+        <div
+          class="photo-container"
+          onclick="openFullImage('./asset/gambar1.jpeg')"
+        >
           <img src="./asset/gambar1.jpeg" alt="Foto Kita" />
         </div>
-        <div class="photo-container">
+        <div
+          class="photo-container"
+          onclick="openFullImage('./asset/gambar2.jpeg')"
+        >
           <img src="./asset/gambar2.jpeg" alt="Foto Kita" />
         </div>
-        <div class="photo-container">
+        <div
+          class="photo-container"
+          onclick="openFullImage('./asset/gambar3.jpeg')"
+        >
           <img src="./asset/gambar3.jpeg" alt="Foto Kita" />
         </div>
-        <div class="photo-container">
+        <div
+          class="photo-container"
+          onclick="openFullImage('./asset/gambar4.jpeg')"
+        >
           <img src="./asset/gambar4.jpeg" alt="Foto Kita" />
         </div>
-        <div class="photo-container">
+        <div
+          class="photo-container"
+          onclick="openFullImage('./asset/gambar5.jpeg')"
+        >
           <img src="./asset/gambar5.jpeg" alt="Foto Kita" />
         </div>
-        <div class="photo-container">
+        <div
+          class="photo-container"
+          onclick="openFullImage('./asset/gambar6.jpeg')"
+        >
           <img src="./asset/gambar6.jpeg" alt="Foto Kita" />
         </div>
       </div>
 
+      <!-- Modal untuk menampilkan gambar penuh -->
+      <div id="fullImageModal" class="modal" onclick="closeFullImage()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="fullImage" />
+      </div>
+
       <div class="message-section">
         <h2>Message for you</h2>
+        <div class="language-toggle">
+          <button id="toggleLang" onclick="toggleLanguage()">🌐 English</button>
+        </div>
         <br />
         <p id="message"></p>
       </div>
 
       <div class="date-ideas">
-        <h2>Mau ke mana kita hari ini</h2>
-        <div class="date-option" onclick="selectDate(this)">Makan</div>
-        <div class="date-option" onclick="selectDate(this)">
-          Nonton Film di Cinema
+        <h2>Mau ke mana kita hari ini?</h2>
+        <div class="date-options-container">
+          <div class="date-option" onclick="selectDate(this)">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"
+                />
+              </svg>
+            </div>
+            <div class="title">Makan</div>
+          </div>
+
+          <div class="date-option" onclick="selectDate(this)">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"
+                />
+              </svg>
+            </div>
+            <div class="title">Nonton Film di Cinema</div>
+          </div>
+
+          <div class="date-option" onclick="selectDate(this)">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"
+                />
+              </svg>
+            </div>
+            <div class="title">Jalan-jalan</div>
+          </div>
+
+          <div class="date-option" onclick="selectDate(this)">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"
+                />
+              </svg>
+            </div>
+            <div class="title">Coffee Date</div>
+          </div>
+
+          <div class="date-option" onclick="selectDate(this)">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"
+                />
+              </svg>
+            </div>
+            <div class="title">Study Date</div>
+          </div>
         </div>
-        <div class="date-option" onclick="selectDate(this)">Jalan-jalan</div>
-        <div class="date-option" onclick="selectDate(this)">Coffee Date</div>
-        <div class="date-option" onclick="selectDate(this)">Study Date</div>
       </div>
 
       <div class="selected-date">
@@ -58,17 +142,28 @@
         <button onclick="resetDateHistory()">Reset Pilihan</button>
       </div>
 
-      <div class="feedback-section">
-        <h2>Balas Pesanku</h2>
-        <textarea placeholder="Tulis pesanmu disini..." rows="4"></textarea>
-        <button onclick="sendFeedback()">Kirim Pesan</button>
+      <div class="other-choices">
+        <h2>ada ide lain mau kencan dimana?</h2>
+        <textarea
+          placeholder="Tulis pesanmu disini..."
+          name="other-choices"
+          id="pesan-kencan-lain"
+          rows="4"
+          spellcheck="false"
+        ></textarea>
+        <button onclick="sendOtherChoices()">Kirim Pesan</button>
       </div>
-      <div class="message-history">
-        <h2>Pesan dari Putri</h2>
-        <div id="messageHistory"></div>
-        <button onclick="resetMessageHistory()" class="reset-button">
+
+      <div class="massage-other-choices">
+        <h2>ide lain dari Putri</h2>
+        <div id="messageOtherChoices"></div>
+        <button onclick="resetMessageOtherChoices()" class="reset-button">
           Hapus Pesan
         </button>
+      </div>
+
+      <div class="footer">
+        <p>© 2024 Powerd by Ojiii. All rights reserved.</p>
       </div>
     </div>
 

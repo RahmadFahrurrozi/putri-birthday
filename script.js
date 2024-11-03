@@ -17,29 +17,61 @@ function showBirthdayMessage() {
 }
 
 // Main Page Functions
-const messages = [
-  "May life bring you all the happiness and strength you deserve.",
-  "Whatever paths you choose, may they be filled with peace and purpose.",
-  "Wishing you nothing but the best in everything you do.",
-];
+const messages = {
+  en: [
+    "May life bring you all the happiness and strength you deserve.",
+    "Whatever paths you choose, may they be filled with peace and purpose.",
+    "Wishing you nothing but the best in everything you do.",
+  ],
+  id: [
+    "Semoga hidup memberimu semua kebahagiaan dan kekuatan yang pantas kamu dapatkan.",
+    "Apapun jalan yang kamu pilih, semoga dipenuhi kedamaian dan tujuan.",
+    "Mendoakan yang terbaik dalam segala hal yang kamu lakukan.",
+  ],
+};
 
+let currentLanguage = "id";
 let messageIndex = 0;
 let charIndex = 0;
 
+function toggleLanguage() {
+  // Reset indexes
+  messageIndex = 0;
+  charIndex = 0;
+
+  // Toggle language
+  currentLanguage = currentLanguage === "id" ? "en" : "id";
+
+  // Update button text
+  const toggleBtn = document.getElementById("toggleLang");
+  toggleBtn.textContent =
+    currentLanguage === "id" ? "🌐 indoensia" : "🌐 english";
+
+  // Clear current message
+  document.getElementById("message").innerHTML = "";
+
+  // Start typing in new language
+  typeMessage();
+}
+
 function typeMessage() {
-  if (messageIndex < messages.length) {
-    if (charIndex < messages[messageIndex].length) {
+  const currentMessages = messages[currentLanguage];
+
+  if (messageIndex < currentMessages.length) {
+    if (charIndex < currentMessages[messageIndex].length) {
       document.getElementById("message").innerHTML +=
-        messages[messageIndex].charAt(charIndex);
+        currentMessages[messageIndex].charAt(charIndex);
       charIndex++;
-      setTimeout(typeMessage, 100);
+      setTimeout(typeMessage, 200);
     } else {
       messageIndex++;
       charIndex = 0;
       setTimeout(() => {
         document.getElementById("message").innerHTML += "<br><br>";
-        typeMessage();
-      }, 1000);
+        if (messageIndex < currentMessages.length) {
+          typeMessage();
+        }
+      }, 2000);
     }
   }
 }
@@ -68,7 +100,8 @@ function displayDateHistory() {
   const dateHistoryDiv = document.getElementById("dateHistory");
 
   if (dateHistory.length === 0) {
-    dateHistoryDiv.innerHTML = "<p>Belum ada pilihan kencan</p>";
+    dateHistoryDiv.innerHTML =
+      "<p class='no-history'>Belum ada pilihan kencan</p>";
     return;
   }
 
@@ -100,74 +133,141 @@ function resetDateHistory() {
   alert("History pilihan kencan sudah direset!");
 }
 
-// Tambahkan fungsi-fungsi ini
-
-function sendFeedback() {
-  const feedback = document.querySelector("textarea").value;
-  if (feedback.trim() !== "") {
+function sendOtherChoices() {
+  const otherChoices = document.getElementById("pesan-kencan-lain").value;
+  if (otherChoices.trim() !== "") {
     // Ambil data pesan yang sudah ada
-    let messageHistory =
-      JSON.parse(localStorage.getItem("messageHistory")) || [];
+    let otherChoicesHistory =
+      JSON.parse(localStorage.getItem("otherChoicesHistory")) || [];
 
     // Tambah pesan baru
-    const newMessage = {
-      content: feedback,
+    otherChoicesHistory.push({
+      content: otherChoices,
       timestamp: new Date().toLocaleString("id-ID"),
-    };
-
-    messageHistory.push(newMessage);
+    });
 
     // Simpan ke localStorage
-    localStorage.setItem("messageHistory", JSON.stringify(messageHistory));
+    localStorage.setItem(
+      "otherChoicesHistory",
+      JSON.stringify(otherChoicesHistory)
+    );
 
-    // Update tampilan
-    displayMessageHistory();
-
-    // Reset textarea dan tampilkan alert
-    document.querySelector("textarea").value = "";
     alert("Pesan kamu sudah terkirim! 💕");
+    document.getElementById("pesan-kencan-lain").value = "";
+
+    displayOtherChoices();
   } else {
     alert("Tolong tulis pesanmu dulu ya 😊");
   }
 }
 
-function displayMessageHistory() {
-  const messageHistory =
-    JSON.parse(localStorage.getItem("messageHistory")) || [];
-  const messageHistoryDiv = document.getElementById("messageHistory");
+function displayOtherChoices() {
+  const otherChoicesHistory =
+    JSON.parse(localStorage.getItem("otherChoicesHistory")) || [];
+  const messageOtherChoices = document.getElementById("messageOtherChoices");
 
-  if (messageHistory.length === 0) {
-    messageHistoryDiv.innerHTML =
-      '<div class="no-messages">Belum ada pesan dari Putri</div>';
+  if (otherChoicesHistory.length === 0) {
+    messageOtherChoices.innerHTML =
+      '<div class="no-other-choices">Belum ada ide dari Putri</div>';
     return;
   }
 
-  messageHistoryDiv.innerHTML = messageHistory
+  messageOtherChoices.innerHTML = otherChoicesHistory
     .map(
-      (message) => `
-            <div class="message-bubble">
-                <div class="message-content">${message.content}</div>
-                <div class="message-timestamp">Dikirim pada: ${message.timestamp}</div>
-            </div>
-        `
+      (choice) => `
+        <div class="message-bubble-other-choices">
+          <div class="message-content">
+           <p>${choice.content}</p>
+          </div>
+        </div>
+      `
     )
     .join("");
 }
 
-function resetMessageHistory() {
+function resetMessageOtherChoices() {
   if (confirm("Apakah kamu yakin ingin menghapus semua pesan?")) {
-    localStorage.removeItem("messageHistory");
-    displayMessageHistory();
+    // Remove the other choices from localStorage
+    localStorage.removeItem("otherChoicesHistory");
+
+    const messageOtherChoices = document.getElementById("messageOtherChoices");
+    messageOtherChoices.innerHTML = "";
+    displayOtherChoices();
     alert("Semua pesan telah dihapus!");
   }
 }
 
-// Initialize functions when page loads
+function openFullImage(src) {
+  const modal = document.getElementById("fullImageModal");
+  const fullImage = document.getElementById("fullImage");
+  fullImage.src = src;
+  modal.style.display = "block"; // Tampilkan modal
+}
+
+function closeFullImage() {
+  const modal = document.getElementById("fullImageModal");
+  modal.style.display = "none"; // Sembunyikan modal
+}
+
+// Audio Control Functions
+let isMusicPlaying = false;
+const bgMusic = document.getElementById("bgMusic");
+const musicControl = document.getElementById("musicControl");
+
+function toggleMusic() {
+  if (isMusicPlaying) {
+    bgMusic.pause();
+    musicControl.querySelector(".music-icon").textContent = "🔈";
+  } else {
+    bgMusic.play();
+    musicControl.querySelector(".music-icon").textContent = "🔊";
+  }
+  isMusicPlaying = !isMusicPlaying;
+}
+
+// Modify existing showBirthdayMessage function
+function showBirthdayMessage() {
+  document.querySelector(".landing-page").style.transform = "translateX(-100%)";
+  document.querySelector(".birthday-message").style.transform = "translateX(0)";
+  createConfetti();
+
+  // Start playing music when birthday message shows
+  if (!isMusicPlaying) {
+    toggleMusic();
+  }
+}
+
+// Add event listener for music control
+if (musicControl) {
+  musicControl.addEventListener("click", toggleMusic);
+}
+
+// Handle autoplay restrictions
+document.addEventListener(
+  "click",
+  function () {
+    if (bgMusic && !isMusicPlaying) {
+      bgMusic.play().catch(function (error) {
+        console.log("Audio autoplay failed:", error);
+      });
+      isMusicPlaying = true;
+      musicControl.querySelector(".music-icon").textContent = "🔊";
+    }
+  },
+  { once: true }
+);
+
+/// Modify window.onload to include new initialization
 window.onload = function () {
   createConfetti();
 
   // Only run these functions on main page
   if (document.getElementById("message")) {
+    // Set initial language
+    currentLanguage = "en";
+    messageIndex = 0;
+    charIndex = 0;
+
     typeMessage();
     displayDateHistory();
     displayMessageHistory();
