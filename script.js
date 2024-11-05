@@ -209,6 +209,35 @@ function closeFullImage() {
   modal.style.display = "none"; // Sembunyikan modal
 }
 
+// Lightbox functionality
+function openFullImage(imgSrc) {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  lightboxImg.src = imgSrc;
+  lightbox.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+// Close lightbox when clicking outside the image or on close button
+document.getElementById("lightbox").addEventListener("click", function (e) {
+  if (e.target !== document.getElementById("lightbox-img")) {
+    this.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+});
+
+// Prevent scrolling when lightbox is open
+document.addEventListener("keydown", function (e) {
+  if (
+    e.key === "Escape" &&
+    document.getElementById("lightbox").classList.contains("active")
+  ) {
+    document.getElementById("lightbox").classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+});
+
 // Audio Control Functions
 let isMusicPlaying = false;
 const bgMusic = document.getElementById("bgMusic");

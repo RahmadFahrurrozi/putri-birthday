@@ -15,48 +15,75 @@
     <button id="musicControl" class="music-control">
       <span class="music-icon">🔈</span>
     </button>
+
     <div class="container">
-      <div class="header">
-        <h1>For My Dearest Putri</h1>
-      </div>
+      <header class="header">
+        <h1 class="title-putri" data-text="For My Dearest Putri">
+          For My Dearest Putri
+        </h1>
+        <div class="title-decoration"></div>
+      </header>
 
       <div class="photo-gallery">
         <div
           class="photo-container"
           onclick="openFullImage('./asset/gambar1.jpeg')"
         >
-          <img src="./asset/gambar1.jpeg" alt="Foto Kita" />
+          <img src="./asset/gambar1.jpeg" alt="Foto Kita" loading="lazy" />
+          <div class="overlay">
+            <span class="view-text">View</span>
+          </div>
         </div>
         <div
           class="photo-container"
           onclick="openFullImage('./asset/gambar2.jpeg')"
         >
-          <img src="./asset/gambar2.jpeg" alt="Foto Kita" />
+          <img src="./asset/gambar2.jpeg" alt="Foto Kita" loading="lazy" />
+          <div class="overlay">
+            <span class="view-text">View</span>
+          </div>
         </div>
         <div
           class="photo-container"
           onclick="openFullImage('./asset/gambar3.jpeg')"
         >
-          <img src="./asset/gambar3.jpeg" alt="Foto Kita" />
+          <img src="./asset/gambar3.jpeg" alt="Foto Kita" loading="lazy" />
+          <div class="overlay">
+            <span class="view-text">View</span>
+          </div>
         </div>
         <div
           class="photo-container"
           onclick="openFullImage('./asset/gambar4.jpeg')"
         >
-          <img src="./asset/gambar4.jpeg" alt="Foto Kita" />
+          <img src="./asset/gambar4.jpeg" alt="Foto Kita" loading="lazy" />
+          <div class="overlay">
+            <span class="view-text">View</span>
+          </div>
         </div>
         <div
           class="photo-container"
           onclick="openFullImage('./asset/gambar5.jpeg')"
         >
-          <img src="./asset/gambar5.jpeg" alt="Foto Kita" />
+          <img src="./asset/gambar5.jpeg" alt="Foto Kita" loading="lazy" />
+          <div class="overlay">
+            <span class="view-text">View</span>
+          </div>
         </div>
         <div
           class="photo-container"
           onclick="openFullImage('./asset/gambar6.jpeg')"
         >
-          <img src="./asset/gambar6.jpeg" alt="Foto Kita" />
+          <img src="./asset/gambar6.jpeg" alt="Foto Kita" loading="lazy" />
+          <div class="overlay">
+            <span class="view-text">View</span>
+          </div>
         </div>
+      </div>
+
+      <div id="lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Fullscreen Image" />
       </div>
 
       <!-- Modal untuk menampilkan gambar penuh -->
